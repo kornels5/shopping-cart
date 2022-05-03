@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useReducer, useCallback } from "react";
 
-function useSafeDispatch(dispatch) {
+const useSafeDispatch = (dispatch) => {
   const mounted = useRef(false);
 
   useLayoutEffect(() => {
@@ -14,9 +14,9 @@ function useSafeDispatch(dispatch) {
     (...args) => (mounted.current ? dispatch(...args) : void 0),
     [dispatch]
   );
-}
+};
 
-function asyncReducer(state, action) {
+const asyncReducer = (state, action) => {
   switch (action.type) {
     case "pending": {
       return { status: "pending", data: null, error: null };
@@ -31,9 +31,9 @@ function asyncReducer(state, action) {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
   }
-}
+};
 
-function useAsync(initialState) {
+const useAsync = (initialState) => {
   const [state, unsafeDispatch] = useReducer(asyncReducer, {
     status: "idle",
     data: null,
@@ -66,6 +66,6 @@ function useAsync(initialState) {
     data,
     run,
   };
-}
+};
 
 export { useAsync };

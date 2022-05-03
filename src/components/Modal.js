@@ -48,7 +48,7 @@ function ModalContents({ title, children, ...props }) {
           </button>
         </ModalDismissButton>
       </div>
-      <h3 className="text-center text-lg">{title}</h3>
+      <h3 className="text-lg text-gray-600">{title}</h3>
       {children}
     </ModalContentsBase>
   );

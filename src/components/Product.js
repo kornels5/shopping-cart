@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/cartContext";
 
 const Product = ({ id, name, image, price }) => {
+  const [, dispatch] = useContext(CartContext);
+
   return (
     <div className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
       <div
@@ -9,7 +13,12 @@ const Product = ({ id, name, image, price }) => {
           backgroundImage: `url(${image})`,
         }}
       >
-        <button className="p-2 border rounded-full text-gray-600 mx-5 -mb-4 bg-white hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+        <button
+          className="p-2 border rounded-full text-gray-600 mx-5 -mb-4 bg-white hover:bg-gray-200 focus:outline-none focus:bg-gray-200"
+          onClick={() =>
+            dispatch({ type: "ADD_ITEM", item: { id, name, image, price } })
+          }
+        >
           <svg
             className="h-5 w-5"
             fill="none"

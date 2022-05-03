@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { useAsync } from "../hooks/useAsync";
 import { fetchProducts } from "../fetchProducts";
 import { LoadingScreen } from "./LoadingScreen";
+import { CartContext } from "../context/cartContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const [, dispatch] = useContext(CartContext);
+
   let navigate = useNavigate();
   const {
     data: product,
@@ -52,43 +55,21 @@ const ProductDetails = () => {
               <p className="text-gray-500">{product.description}</p>
               <hr className="my-3" />
               <div className="mt-2">
-                <label htmlFor="count" className="text-gray-700 text-sm">
-                  Count:
-                </label>
                 <div className="flex items-center mt-1">
-                  <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                    <svg
-                      className="h-5 w-5"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </button>
-                  <input
-                    className="text-gray-700 text-lg mx-2 w-6"
-                    id="count"
-                    value="20"
-                    onChange={(e) => console.log(e)}
-                  />
-                  <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                    <svg
-                      className="h-5 w-5"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </button>
-                  <button className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
+                  <button
+                    className="p-2 border rounded-full text-gray-600 bg-white hover:bg-gray-200 focus:outline-none focus:bg-gray-200"
+                    onClick={() =>
+                      dispatch({
+                        type: "ADD_ITEM",
+                        item: {
+                          id,
+                          name: product.title,
+                          image: product.image,
+                          price: product.price,
+                        },
+                      })
+                    }
+                  >
                     <svg
                       className="h-5 w-5"
                       fill="none"
