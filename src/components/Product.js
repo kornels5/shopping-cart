@@ -9,7 +9,7 @@ const Product = ({ id, name, image, price }) => {
           backgroundImage: `url(${image})`,
         }}
       >
-        <button className="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+        <button className="p-2 border rounded-full text-gray-600 mx-5 -mb-4 bg-white hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
           <svg
             className="h-5 w-5"
             fill="none"

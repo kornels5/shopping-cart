@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Product } from "./Product";
 import { fetchProducts } from "../fetchProducts";
 import { useAsync } from "../hooks/useAsync";
+import { LoadingScreen } from "./LoadingScreen";
 
 const ProductList = () => {
   const {
@@ -18,7 +19,7 @@ const ProductList = () => {
   }, [run]);
 
   if (status === "pending") {
-    return <div>...Loading</div>;
+    return <LoadingScreen />;
   } else if (status === "resolved") {
     return (
       <main className="my-8">
